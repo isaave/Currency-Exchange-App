@@ -2,7 +2,11 @@
 
 **Aula 10 · Tailwind CSS 4.3 + React 19 + Vite 8**
 
-Referência visual: *Tailwind Play — 8 Visual Challenges* no Figma.
+**Referência visual:** [Figma — Exercise 06: Settings Toggle — peer e checked](https://www.figma.com/design/Zzehx6K2rvkvv8ej92MUDo/Tailwind-Play-%E2%80%94-8-Visual-Challenges?node-id=1-145)
+
+**Conceitos:** Utility-first, flexbox, borders, colors, focus, responsive
+
+**Figma node-id:** `1-145`
 
 ---
 

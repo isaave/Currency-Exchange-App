@@ -326,6 +326,8 @@ export default function ExerciseFrame({ number, title, subtitle, children }) {
 
 ### Exercício 01 — Profile Card — entendendo Utility-First
 
+Referência visual: [Figma — Exercise 01: Profile Card — entendendo Utility-First](https://www.figma.com/design/Zzehx6K2rvkvv8ej92MUDo/Tailwind-Play-%E2%80%94-8-Visual-Challenges?node-id=1-4)  ·  Conceitos: Utility-first, spacing, sizing, typography, colors, borders, shadows, flexbox
+
 
 ### `src/components/exercises/Exercise01ProfileCard.jsx`
 
@@ -387,6 +389,8 @@ export default function Exercise01ProfileCard() {
 
 
 ### Exercício 02 — Product Grid — estados e responsividade
+
+Referência visual: [Figma — Exercise 02: Product Grid — estados e responsividade](https://www.figma.com/design/Zzehx6K2rvkvv8ej92MUDo/Tailwind-Play-%E2%80%94-8-Visual-Challenges?node-id=1-25)  ·  Conceitos: Grid, responsive, hover, focus, active, disabled, flexbox, utility-first
 
 
 ### `src/components/exercises/Exercise02ProductGrid.jsx`
@@ -471,6 +475,8 @@ export default function Exercise02ProductGrid() {
 
 ### Exercício 03 — Theme Lab — tokens, dark mode e @layer
 
+Referência visual: [Figma — Exercise 03: Theme Lab — tokens, dark mode e @layer](https://www.figma.com/design/Zzehx6K2rvkvv8ej92MUDo/Tailwind-Play-%E2%80%94-8-Visual-Challenges?node-id=1-59)  ·  Conceitos: Dark mode, @theme, @custom-variant, @layer, @apply, design tokens, colors, utility-first
+
 
 ### `src/components/exercises/Exercise03ThemeLab.jsx`
 
@@ -551,6 +557,8 @@ export default function Exercise03ThemeLab() {
 
 
 ### Exercício 04 — Login Form — focus e acessibilidade
+
+Referência visual: [Figma — Exercise 04: Login Form — focus e acessibilidade](https://www.figma.com/design/Zzehx6K2rvkvv8ej92MUDo/Tailwind-Play-%E2%80%94-8-Visual-Challenges?node-id=1-90)  ·  Conceitos: Utility-first, spacing, sizing, typography, colors, borders, focus, responsive
 
 
 ### `src/components/exercises/Exercise04LoginForm.jsx`
@@ -641,6 +649,8 @@ export default function Exercise04LoginForm() {
 
 
 ### Exercício 05 — Pricing Cards — composição e hierarquia
+
+Referência visual: [Figma — Exercise 05: Pricing Cards — composição e hierarquia](https://www.figma.com/design/Zzehx6K2rvkvv8ej92MUDo/Tailwind-Play-%E2%80%94-8-Visual-Challenges?node-id=1-112)  ·  Conceitos: Utility-first, spacing, typography, colors, borders, shadows, flexbox, grid, responsive
 
 
 ### `src/components/exercises/Exercise05PricingCards.jsx`
@@ -742,6 +752,8 @@ export default function Exercise05PricingCards() {
 
 ### Exercício 06 — Settings Toggle — peer e checked
 
+Referência visual: [Figma — Exercise 06: Settings Toggle — peer e checked](https://www.figma.com/design/Zzehx6K2rvkvv8ej92MUDo/Tailwind-Play-%E2%80%94-8-Visual-Challenges?node-id=1-145)  ·  Conceitos: Utility-first, flexbox, borders, colors, focus, responsive
+
 
 ### `src/components/exercises/Exercise06SettingsToggle.jsx`
 
@@ -826,6 +838,8 @@ export default function Exercise06SettingsToggle() {
 
 ### Exercício 07 — FAQ Accordion — details e open
 
+Referência visual: [Figma — Exercise 07: FAQ Accordion — details e open](https://www.figma.com/design/Zzehx6K2rvkvv8ej92MUDo/Tailwind-Play-%E2%80%94-8-Visual-Challenges?node-id=1-166)  ·  Conceitos: Utility-first, spacing, typography, borders, colors
+
 
 ### `src/components/exercises/Exercise07FaqAccordion.jsx`
 
@@ -901,6 +915,8 @@ export default function Exercise07FaqAccordion() {
 
 
 ### Exercício 08 — Dashboard Summary — Grid e composição
+
+Referência visual: [Figma — Exercise 08: Dashboard Summary — Grid e composição](https://www.figma.com/design/Zzehx6K2rvkvv8ej92MUDo/Tailwind-Play-%E2%80%94-8-Visual-Challenges?node-id=1-184)  ·  Conceitos: Utility-first, grid, flexbox, responsive, spacing, sizing, typography, colors, borders
 
 
 ### `src/components/exercises/Exercise08DashboardSummary.jsx`
@@ -995,6 +1011,8 @@ export default function Exercise08DashboardSummary() {
 
 
 ### Exercício 09 — Theme Toggle Button — Light / Dark
+
+Referência visual: [Figma — Exercise 09: Theme Toggle Button — Light / Dark](https://www.figma.com/design/Zzehx6K2rvkvv8ej92MUDo/Tailwind-Play-%E2%80%94-8-Visual-Challenges?node-id=5-2)  ·  Conceitos: Utility-first, dark mode, @theme, @custom-variant, design tokens, colors, hover, focus
 
 
 ### `src/components/exercises/Exercise09ThemeToggle.jsx`

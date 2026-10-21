@@ -85,6 +85,13 @@ Markdown, pronto para entrega. É gerado automaticamente a partir dos fontes:
 ./scripts/generate-code-md.sh
 ```
 
+Isso também gera [`markdown/`](./markdown/) com **um arquivo por exercício**
+(para entregar separado) e as referências do Figma já com link direto pro
+node de cada um.
+
+[`REFERENCIA-FIGMA.md`](./REFERENCIA-FIGMA.md) documenta o design: paleta,
+tokens, medidas e o que cada frame do Figma tem dentro.
+
 ## Referências
 
 - Notion: [Aula 10 — Tailwind CSS 4.3 + React + Vite 8](https://deluxe-blue-bc1.notion.site/Aula-10-Tailwind-CSS-4-3-React-Vite-8-Guia-Completo-3f1dfca74d8d80e1acdde3b83c701491)

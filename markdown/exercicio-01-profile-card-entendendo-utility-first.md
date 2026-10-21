@@ -2,7 +2,11 @@
 
 **Aula 10 · Tailwind CSS 4.3 + React 19 + Vite 8**
 
-Referência visual: *Tailwind Play — 8 Visual Challenges* no Figma.
+**Referência visual:** [Figma — Exercise 01: Profile Card — entendendo Utility-First](https://www.figma.com/design/Zzehx6K2rvkvv8ej92MUDo/Tailwind-Play-%E2%80%94-8-Visual-Challenges?node-id=1-4)
+
+**Conceitos:** Utility-first, spacing, sizing, typography, colors, borders, shadows, flexbox
+
+**Figma node-id:** `1-4`
 
 ---
 

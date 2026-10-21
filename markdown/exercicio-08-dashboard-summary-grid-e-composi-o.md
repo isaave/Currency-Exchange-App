@@ -2,7 +2,11 @@
 
 **Aula 10 · Tailwind CSS 4.3 + React 19 + Vite 8**
 
-Referência visual: *Tailwind Play — 8 Visual Challenges* no Figma.
+**Referência visual:** [Figma — Exercise 08: Dashboard Summary — Grid e composição](https://www.figma.com/design/Zzehx6K2rvkvv8ej92MUDo/Tailwind-Play-%E2%80%94-8-Visual-Challenges?node-id=1-184)
+
+**Conceitos:** Utility-first, grid, flexbox, responsive, spacing, sizing, typography, colors, borders
+
+**Figma node-id:** `1-184`
 
 ---
 

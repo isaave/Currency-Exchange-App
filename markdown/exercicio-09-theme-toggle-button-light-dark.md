@@ -2,7 +2,11 @@
 
 **Aula 10 · Tailwind CSS 4.3 + React 19 + Vite 8**
 
-Referência visual: *Tailwind Play — 8 Visual Challenges* no Figma.
+**Referência visual:** [Figma — Exercise 09: Theme Toggle Button — Light / Dark](https://www.figma.com/design/Zzehx6K2rvkvv8ej92MUDo/Tailwind-Play-%E2%80%94-8-Visual-Challenges?node-id=5-2)
+
+**Conceitos:** Utility-first, dark mode, @theme, @custom-variant, design tokens, colors, hover, focus
+
+**Figma node-id:** `5-2`
 
 ---
 

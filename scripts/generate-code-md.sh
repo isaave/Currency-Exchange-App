@@ -81,25 +81,29 @@ MID2
 
 # ---------------------------------------------------------------- por exercício
 EXERCISES=(
-  "01|Exercise01ProfileCard.jsx|Profile Card — entendendo Utility-First"
-  "02|Exercise02ProductGrid.jsx|Product Grid — estados e responsividade"
-  "03|Exercise03ThemeLab.jsx|Theme Lab — tokens, dark mode e @layer"
-  "04|Exercise04LoginForm.jsx|Login Form — focus e acessibilidade"
-  "05|Exercise05PricingCards.jsx|Pricing Cards — composição e hierarquia"
-  "06|Exercise06SettingsToggle.jsx|Settings Toggle — peer e checked"
-  "07|Exercise07FaqAccordion.jsx|FAQ Accordion — details e open"
-  "08|Exercise08DashboardSummary.jsx|Dashboard Summary — Grid e composição"
-  "09|Exercise09ThemeToggle.jsx|Theme Toggle Button — Light / Dark"
+  "01|Exercise01ProfileCard.jsx|Profile Card — entendendo Utility-First|1-4|Utility-first, spacing, sizing, typography, colors, borders, shadows, flexbox"
+  "02|Exercise02ProductGrid.jsx|Product Grid — estados e responsividade|1-25|Grid, responsive, hover, focus, active, disabled, flexbox, utility-first"
+  "03|Exercise03ThemeLab.jsx|Theme Lab — tokens, dark mode e @layer|1-59|Dark mode, @theme, @custom-variant, @layer, @apply, design tokens, colors, utility-first"
+  "04|Exercise04LoginForm.jsx|Login Form — focus e acessibilidade|1-90|Utility-first, spacing, sizing, typography, colors, borders, focus, responsive"
+  "05|Exercise05PricingCards.jsx|Pricing Cards — composição e hierarquia|1-112|Utility-first, spacing, typography, colors, borders, shadows, flexbox, grid, responsive"
+  "06|Exercise06SettingsToggle.jsx|Settings Toggle — peer e checked|1-145|Utility-first, flexbox, borders, colors, focus, responsive"
+  "07|Exercise07FaqAccordion.jsx|FAQ Accordion — details e open|1-166|Utility-first, spacing, typography, borders, colors"
+  "08|Exercise08DashboardSummary.jsx|Dashboard Summary — Grid e composição|1-184|Utility-first, grid, flexbox, responsive, spacing, sizing, typography, colors, borders"
+  "09|Exercise09ThemeToggle.jsx|Theme Toggle Button — Light / Dark|5-2|Utility-first, dark mode, @theme, @custom-variant, design tokens, colors, hover, focus"
 )
 
+FIGMA_FILE="https://www.figma.com/design/Zzehx6K2rvkvv8ej92MUDo/Tailwind-Play-%E2%80%94-8-Visual-Challenges"
+
 for entry in "${EXERCISES[@]}"; do
-  num="${entry%%|*}"; rest="${entry#*|}"
-  file="${rest%%|*}"; title="${rest#*|}"
+  IFS='|' read -r num file title node concepts <<< "$entry"
+  link="$FIGMA_FILE?node-id=$node"
 
   # --- documento único
   {
     echo ""
     echo "### Exercício $num — $title"
+    echo ""
+    echo "Referência visual: [Figma — Exercise $num: $title]($link)  ·  Conceitos: $concepts"
     echo ""
   } >> "$OUT"
   emit_block "src/components/exercises/$file" "jsx" >> "$OUT"
@@ -112,7 +116,11 @@ for entry in "${EXERCISES[@]}"; do
     echo ""
     echo "**Aula 10 · Tailwind CSS 4.3 + React 19 + Vite 8**"
     echo ""
-    echo "Referência visual: *Tailwind Play — 8 Visual Challenges* no Figma."
+    echo "**Referência visual:** [Figma — Exercise $num: $title]($link)"
+    echo ""
+    echo "**Conceitos:** $concepts"
+    echo ""
+    echo "**Figma node-id:** \`$node\`"
     echo ""
     echo "---"
   } > "$one"
