@@ -1,24 +1,29 @@
 #!/usr/bin/env bash
-# Gera CODIGO.md concatenando o código real do projeto (sem transcrição manual).
+# Gera o código do projeto em Markdown:
+#   - CODIGO.md          (documento único com tudo)
+#   - markdown/*.md      (um arquivo por exercício, para entregar separado)
+# Sempre a partir dos fontes reais — sem transcrição manual.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 OUT="$ROOT/CODIGO.md"
+OUTDIR="$ROOT/markdown"
+BT='```'
 
-emit_file() {
-  local path="$1" lang="$2" title="$3"
-  local BT='```'
-  {
-    echo ""
-    echo "### \`$path\`"
-    echo ""
-    echo "${BT}${lang}"
-    cat "$ROOT/$path"
-    echo "${BT}"
-    echo ""
-  } >> "$OUT"
+mkdir -p "$OUTDIR"
+
+# ---------------------------------------------------------------- helpers
+emit_block() {
+  # $1 = caminho relativo, $2 = linguagem
+  printf '\n### `%s`\n\n%s%s\n%s\n%s\n\n' "$1" "$BT" "$2" "$(cat "$ROOT/$1")" "$BT"
 }
 
+emit_block_to() {
+  # $1 = arquivo de destino, $2 = caminho relativo, $3 = linguagem
+  printf '\n### `%s`\n\n%s%s\n%s\n%s\n\n' "$2" "$BT" "$3" "$(cat "$ROOT/$2")" "$BT" >> "$1"
+}
+
+# ---------------------------------------------------------------- tabela
 cat > "$OUT" <<'HEADER'
 # Tailwind Play — 8 Visual Challenges
 
@@ -45,9 +50,9 @@ referências visuais do Figma **Tailwind Play — 8 Visual Challenges**.
 
 HEADER
 
-emit_file "package.json" "json" "package.json"
-emit_file "vite.config.js" "js" "vite.config.js"
-emit_file "index.html" "html" "index.html"
+emit_block "package.json" "json" >> "$OUT"
+emit_block "vite.config.js" "js" >> "$OUT"
+emit_block "index.html" "html" >> "$OUT"
 
 cat >> "$OUT" <<'MID'
 
@@ -61,10 +66,10 @@ reúne as classes escritas com `@apply`.
 
 MID
 
-emit_file "src/index.css" "css" "src/index.css"
-emit_file "src/main.jsx" "jsx" "src/main.jsx"
-emit_file "src/App.jsx" "jsx" "src/App.jsx"
-emit_file "src/components/ExerciseFrame.jsx" "jsx" "src/components/ExerciseFrame.jsx"
+emit_block "src/index.css" "css" >> "$OUT"
+emit_block "src/main.jsx" "jsx" >> "$OUT"
+emit_block "src/App.jsx" "jsx" >> "$OUT"
+emit_block "src/components/ExerciseFrame.jsx" "jsx" >> "$OUT"
 
 cat >> "$OUT" <<'MID2'
 
@@ -74,27 +79,47 @@ cat >> "$OUT" <<'MID2'
 
 MID2
 
-for entry in \
-  "01|Exercise01ProfileCard.jsx|Profile Card — entendendo Utility-First" \
-  "02|Exercise02ProductGrid.jsx|Product Grid — estados e responsividade" \
-  "03|Exercise03ThemeLab.jsx|Theme Lab — tokens, dark mode e @layer" \
-  "04|Exercise04LoginForm.jsx|Login Form — focus e acessibilidade" \
-  "05|Exercise05PricingCards.jsx|Pricing Cards — composição e hierarquia" \
-  "06|Exercise06SettingsToggle.jsx|Settings Toggle — peer e checked" \
-  "07|Exercise07FaqAccordion.jsx|FAQ Accordion — details e open" \
-  "08|Exercise08DashboardSummary.jsx|Dashboard Summary — Grid e composição" \
+# ---------------------------------------------------------------- por exercício
+EXERCISES=(
+  "01|Exercise01ProfileCard.jsx|Profile Card — entendendo Utility-First"
+  "02|Exercise02ProductGrid.jsx|Product Grid — estados e responsividade"
+  "03|Exercise03ThemeLab.jsx|Theme Lab — tokens, dark mode e @layer"
+  "04|Exercise04LoginForm.jsx|Login Form — focus e acessibilidade"
+  "05|Exercise05PricingCards.jsx|Pricing Cards — composição e hierarquia"
+  "06|Exercise06SettingsToggle.jsx|Settings Toggle — peer e checked"
+  "07|Exercise07FaqAccordion.jsx|FAQ Accordion — details e open"
+  "08|Exercise08DashboardSummary.jsx|Dashboard Summary — Grid e composição"
   "09|Exercise09ThemeToggle.jsx|Theme Toggle Button — Light / Dark"
-do
+)
+
+for entry in "${EXERCISES[@]}"; do
   num="${entry%%|*}"; rest="${entry#*|}"
   file="${rest%%|*}"; title="${rest#*|}"
+
+  # --- documento único
   {
     echo ""
     echo "### Exercício $num — $title"
     echo ""
   } >> "$OUT"
-  emit_file "src/components/exercises/$file" "jsx" "src/components/exercises/$file"
+  emit_block "src/components/exercises/$file" "jsx" >> "$OUT"
+
+  # --- arquivo individual
+  slug="$(printf '%s' "$title" | LC_ALL=C tr -cs 'a-zA-Z0-9' '-' | tr 'A-Z' 'a-z' | sed 's/-\+/-/g; s/^-//; s/-$//')"
+  one="$OUTDIR/exercicio-$num-$slug.md"
+  {
+    echo "# Exercício $num — $title"
+    echo ""
+    echo "**Aula 10 · Tailwind CSS 4.3 + React 19 + Vite 8**"
+    echo ""
+    echo "Referência visual: *Tailwind Play — 8 Visual Challenges* no Figma."
+    echo ""
+    echo "---"
+  } > "$one"
+  emit_block_to "$one" "src/components/exercises/$file" "jsx"
 done
 
+# ---------------------------------------------------------------- conceituos
 cat >> "$OUT" <<'FOOTER'
 
 ---
@@ -151,4 +176,5 @@ As utilities base atendem ao mobile; os breakpoints (`sm:`, `md:`, `lg:`)
 expandem para telas maiores.
 FOOTER
 
-echo "CODIGO.md gerado: $(wc -l < "$OUT") linhas"
+echo "CODIGO.md: $(wc -l < "$OUT") linhas"
+echo "markdown/: $(ls "$OUTDIR" | wc -l | tr -d ' ') arquivos"
