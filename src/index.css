@@ -1,0 +1,75 @@
+@import 'tailwindcss';
+
+/*
+ * Modo escuro por classe (e não por `prefers-color-scheme`).
+ * A variante `dark:` só é aplicada dentro de `.dark` ou de `.dark *`.
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Tokens semânticos. Os valores ficam em variáveis CSS para que o mesmo
+ * nome de utility (`bg-surface`, `text-muted`...) resolva para cores
+ * diferentes em Light e Dark mode.
+ */
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-panel: var(--panel);
+  --color-subtle: var(--subtle);
+  --color-foreground: var(--foreground);
+  --color-body: var(--body);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-strong: var(--primary-strong);
+  --color-chestnut: var(--chestnut);
+  --color-chestnut-dark: var(--chestnut-dark);
+}
+
+:root {
+  --background: #f1f5f9;
+  --surface: #ffffff;
+  --panel: #f1f5f9;
+  --subtle: #f8fafc;
+  --foreground: #0f172a;
+  --body: #475569;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --primary: #2563eb;
+  --primary-strong: #1d4ed8;
+  --chestnut: #8b4a2f;
+  --chestnut-dark: #b5795f;
+}
+
+.dark {
+  --background: #0b1020;
+  --surface: #151b34;
+  --panel: #1a2140;
+  --subtle: #0d1226;
+  --foreground: #f1f5f9;
+  --body: #cbd5e1;
+  --muted: #a5b0c9;
+  --border: #2a3358;
+  --primary: #3b82f6;
+  --primary-strong: #60a5fa;
+  --chestnut: #b5795f;
+  --chestnut-dark: #8b4a2f;
+}
+
+/*
+ * Camada de componentes: aqui vivem as classes semânticas reaproveitadas
+ * por todos os exercícios, escritas com `@apply`.
+ */
+@layer components {
+  .card {
+    @apply rounded-2xl border border-border bg-surface p-6 shadow-sm;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center rounded-lg bg-slate-100 px-5 py-2.5 text-sm font-semibold text-slate-900 transition-colors hover:bg-slate-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900;
+  }
+}
