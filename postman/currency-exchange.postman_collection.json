@@ -1,0 +1,133 @@
+{
+  "info": {
+    "name": "Currency Exchange — Projeto 02",
+    "description": "Coleção Postman para os endpoints da API Frankfurter utilizados pelo Currency Exchange.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.frankfurter.dev/v1",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Get Latest Rates",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/latest?base=USD&symbols=BRL",
+          "host": [
+            "api",
+            "frankfurter",
+            "dev"
+          ],
+          "path": [
+            "v1",
+            "latest"
+          ],
+          "query": [
+            {
+              "key": "base",
+              "value": "USD",
+              "description": "Moeda base da cotação"
+            },
+            {
+              "key": "symbols",
+              "value": "BRL",
+              "description": "Moedas de destino"
+            }
+          ]
+        },
+        "description": "Retorna as taxas de cotação mais recentes."
+      }
+    },
+    {
+      "name": "Get Currencies",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/currencies",
+          "host": [
+            "api",
+            "frankfurter",
+            "dev"
+          ],
+          "path": [
+            "v1",
+            "currencies"
+          ],
+          "query": []
+        },
+        "description": "Retorna a lista de moedas disponíveis com seus nomes."
+      }
+    },
+    {
+      "name": "Get Historical Rates (period)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}/v1/2026-10-01..2026-10-22?base=USD&symbols=BRL",
+          "host": [
+            "api",
+            "frankfurter",
+            "dev"
+          ],
+          "path": [
+            "v1",
+            "2026-10-01.."
+          ],
+          "query": [
+            {
+              "key": "base",
+              "value": "USD",
+              "description": "Moeda base da cotação"
+            },
+            {
+              "key": "symbols",
+              "value": "BRL",
+              "description": "Moeda de destino"
+            }
+          ]
+        },
+        "description": "Retorna as taxas históricas de um período (formato start_date..end_date)."
+      }
+    },
+    {
+      "name": "Get Historical Rate (single date)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/v1/2026-10-22?base=USD&symbols=BRL",
+          "host": [
+            "api",
+            "frankfurter",
+            "dev"
+          ],
+          "path": [
+            "v1",
+            "2026-10-22"
+          ],
+          "query": [
+            {
+              "key": "base",
+              "value": "USD",
+              "description": "Moeda base da cotação"
+            },
+            {
+              "key": "symbols",
+              "value": "BRL",
+              "description": "Moeda de destino"
+            }
+          ]
+        },
+        "description": "Retorna a taxa histórica do dia informado."
+      }
+    }
+  ]
+}

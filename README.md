@@ -1,24 +1,36 @@
-# Tailwind Play — 8 Visual Challenges
+# Currency Exchange — Projeto 02
 
-**Aula 10 · Tailwind CSS 4.3 + React 19 + Vite 8**
+**Conversão e análise de moedas** em uma Single Page Application construída com
+**React** e consumindo a API aberta **Frankfurter**.
 
-Implementação dos 9 exercícios do *Tailwind Play — Board de Laboratórios*,
-reproduzindo as referências visuais do Figma
-**Tailwind Play — 8 Visual Challenges**.
+A aplicação permite converter valores entre moedas com taxas em tempo real,
+visualizar a evolução histórica da taxa de câmbio e exportar o histórico de
+conversões em CSV.
 
-## Exercícios
+## Stack
 
-| # | Desafio | Conceitos | Figma |
-|---|---|---|---|
-| 01 | Profile Card | Utility-first, spacing, sizing, typography, colors, borders, shadows, flexbox | `node-id=1-4` |
-| 02 | Product Grid | Grid, responsive, hover, focus, active, disabled | `node-id=1-25` |
-| 03 | Theme Lab | Dark mode, `@theme`, `@custom-variant`, `@layer`, `@apply`, design tokens | `node-id=1-59` |
-| 04 | Login Form | Utility-first, spacing, sizing, typography, colors, borders, focus, responsive | `node-id=1-90` |
-| 05 | Pricing Cards | Utility-first, spacing, typography, colors, borders, shadows, flexbox, grid | `node-id=1-112` |
-| 06 | Settings Toggle | Utility-first, flexbox, borders, colors, focus, responsive, `peer`/`checked` | `node-id=1-145` |
-| 07 | FAQ Accordion | Utility-first, spacing, typography, borders, colors, `details`/`open` | `node-id=1-166` |
-| 08 | Dashboard Summary | Utility-first, grid, flexbox, responsive, spacing, sizing, typography, colors, borders | `node-id=1-184` |
-| 09 | Theme Toggle Button | Utility-first, dark mode, `@theme`, `@custom-variant`, design tokens, hover, focus | `node-id=5-2` |
+| Tecnologia | Versão |
+|---|---|
+| React | 19 |
+| Vite | 8 |
+| Tailwind CSS | 4 |
+| Recharts | 3 |
+| API Frankfurter | `https://api.frankfurter.dev/v1` |
+
+## Funcionalidades
+
+- **Conversor de moedas** — valor, moeda de origem e moeda de destino com
+  cotação em tempo real (API Frankfurter) e botão de converter.
+- **Taxa de cotação** — exibição da taxa (1 USD = X BRL) e valor convertido,
+  com a data da cotação.
+- **Gráfico de evolução** — linha com a taxa histórica (últimos 30 dias) para a
+  paridade selecionada.
+- **Histórico de conversões** — registro de conversões realizadas (estado
+  controlado no `App`, custom hook `useConversions`).
+- **Filtros e ordenação** — ordenação clicável nas colunas do histórico e
+  filtro por texto.
+- **Exportação CSV** — download do histórico (filtro/ordenação aplicados) em
+  arquivo `conversoes.csv`.
 
 ## Como rodar
 
@@ -30,69 +42,67 @@ npm run preview  # serve o build de produção
 npm run lint     # oxlint
 ```
 
-## Estrutura
+## Estrutura do projeto
 
 ```
 src/
+├── api/
+│   └── frankfurter.js      # funções de consumo da API (fetch + async/await)
 ├── components/
-│   ├── ExerciseFrame.jsx          # casca visual comum aos exercícios
-│   └── exercises/
-│       ├── Exercise01ProfileCard.jsx
-│       ├── Exercise02ProductGrid.jsx
-│       ├── Exercise03ThemeLab.jsx
-│       ├── Exercise04LoginForm.jsx
-│       ├── Exercise05PricingCards.jsx
-│       ├── Exercise06SettingsToggle.jsx
-│       ├── Exercise07FaqAccordion.jsx
-│       ├── Exercise08DashboardSummary.jsx
-│       └── Exercise09ThemeToggle.jsx
-├── index.css                     # @theme, @custom-variant, tokens e @layer components
-├── App.jsx                       # shell, navegação e toggle global de tema
+│   ├── Header.jsx
+│   ├── Converter.jsx       # conversor + cotação em tempo real
+│   ├── ExchangeChart.jsx  # gráfico de evolução da taxa
+│   └── HistoryTable.jsx   # histórico, filtros, ordenação e CSV
+├── hooks/
+│   ├── useCurrencies.js        # custom hook: lista de moedas
+│   ├── useExchangeRate.js      # custom hook: taxa mais recente
+│   ├── useHistoricalRates.js  # custom hook: histórico de taxas
+│   └── useConversions.js       # custom hook: estado do histórico
+├── utils/
+│   ├── csv.js             # conversão para CSV + download
+│   ├── dates.js           # helpers de data ISO
+│   └── format.js          # formatação de moeda/taxa/data
+├── App.jsx                # shell, estado da paridade e do histórico (lifting state up)
 └── main.jsx
 ```
 
-## O ponto central: tokens semânticos
+## API Frankfurter
 
-O `src/index.css` registra os tokens com `@theme inline`. O `inline` é
-essencial — ele faz a utility usar `var(--surface)` diretamente, resolvendo no
-escopo do elemento. Sem ele o valor seria congelado no `:root` e o dark mode
-não funcionaria dentro de um subtree.
+- **Cotações em tempo real:** `GET /v1/latest?base=USD&symbols=BRL`
+- **Histórico em período:** `GET /v1/{start_date}..{end_date}?base=USD&symbols=BRL`
+- **Histórico de um dia:** `GET /v1/{date}?base=USD&symbols=BRL`
+- **Moedas disponíveis:** `GET /v1/currencies`
 
-```css
-@theme inline {
-  --color-surface: var(--surface);
-}
+Documentação completa: <https://frankfurter.dev>
 
-:root { --surface: #ffffff; }
-.dark { --surface: #151b34; }
-```
+## Coleção Postman
 
-E o dark mode por classe:
+A collection consumindo os endpoints da API está em
+[`postman/currency-exchange.postman_collection.json`](./postman/currency-exchange.postman_collection.json).
 
-```css
-@custom-variant dark (&:where(.dark, .dark *));
-```
+## Conceitos trabalhados
 
-O Exercício 03 aplica `class="dark"` em um único card para criar um escopo
-local de tokens — as mesmas utilities, outros valores.
+- React e JSX
+- Componentização e props
+- Eventos
+- `useState` e `useEffect`
+- Lifting State Up
+- Custom Hooks
+- Consumo de API com `fetch` e `async/await`
+- Manipulação de arrays e objetos
+- Gráficos
+- Filtros e ordenação
+- Exportação CSV
+- Git e GitHub
 
-## Código em Markdown
+## Entrega
 
-[`CODIGO.md`](./CODIGO.md) reúne todo o código do projeto em blocos de
-Markdown, pronto para entrega. É gerado automaticamente a partir dos fontes:
+Checklist da entrega do Projeto 02:
 
-```bash
-./scripts/generate-code-md.sh
-```
-
-Isso também gera [`markdown/`](./markdown/) com **um arquivo por exercício**
-(para entregar separado) e as referências do Figma já com link direto pro
-node de cada um.
-
-[`REFERENCIA-FIGMA.md`](./REFERENCIA-FIGMA.md) documenta o design: paleta,
-tokens, medidas e o que cada frame do Figma tem dentro.
-
-## Referências
-
-- Notion: [Aula 10 — Tailwind CSS 4.3 + React + Vite 8](https://deluxe-blue-bc1.notion.site/Aula-10-Tailwind-CSS-4-3-React-Vite-8-Guia-Completo-3f1dfca74d8d80e1acdde3b83c701491)
-- Figma: [Tailwind Play — 8 Visual Challenges](https://www.figma.com/design/Zzehx6K2rvkvv8ej92MUDo/Tailwind-Play-%E2%80%94-8-Visual-Challenges?node-id=1-4)
+- [x] Repositório público no GitHub
+- [x] Aplicação funcionando
+- [x] Documentação do projeto
+- [ ] Protótipos no Figma
+- [ ] Collection do Postman
+- [x] Histórico de commits demonstrando a evolução do desenvolvimento
+- [ ] Data final de entrega: 27/10/2026
