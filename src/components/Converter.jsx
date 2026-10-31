@@ -97,7 +97,12 @@ export default function Converter({ base, target, onBaseChange, onTargetChange, 
       </div>
 
       <div className="flex justify-end">
-        <button type="button" onClick={handleConvert} className="btn-primary">
+        <button
+          type="button"
+          onClick={handleConvert}
+          disabled={loading || rate === null}
+          className="btn-primary disabled:cursor-not-allowed disabled:opacity-50"
+        >
           Converter
         </button>
       </div>

@@ -27,3 +27,17 @@ export function downloadCSV(filename, csv) {
   link.remove();
   URL.revokeObjectURL(url);
 }
+
+export function toRatesCSV(points) {
+  const header = ['Data', 'Taxa', 'Variacao_%'];
+  const rows = points.map((point, index) => {
+    const previous = points[index - 1];
+    const variation = previous ? ((point.rate - previous.rate) / previous.rate) * 100 : 0;
+
+    return [point.date, point.rate, variation];
+  });
+
+  const lines = [header, ...rows].map((row) => row.map((value) => `"${String(value ?? '').replace(/"/g, '""')}"`).join(','));
+
+  return `${lines.join('\r\n')}\r\n`;
+}
